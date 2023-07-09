@@ -3,6 +3,8 @@ document.querySelector(".form").addEventListener("submit", handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
 
+   const submitButton = document.querySelector(".form button");
+
   submitButton.disabled = true;
 
   const delayInput = document.querySelector("input[name='delay']");
