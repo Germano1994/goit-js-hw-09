@@ -47,10 +47,11 @@ const secondsElement = document.querySelector("[data-seconds]");
 let countdownInterval;
 
 startButton.addEventListener("click", () => {
-  const selectedDate = flatpickr.parseDate(document.querySelector("#datetime-picker").value);
+  const selectedDate = new Date(document.querySelector("#datetime-picker").value);
+  console.log(selectedDate);
   const currentDate = new Date();
   const difference = selectedDate - currentDate;
-
+  console.log(difference <= 0);
   if (difference <= 0) {
     return;
   }
