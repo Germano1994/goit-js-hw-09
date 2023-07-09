@@ -1,25 +1,30 @@
 document.querySelector(".form").addEventListener("submit", handleSubmit);
 
-function handleSubmit(event) {
+async function handleSubmit(event) {
   event.preventDefault();
 
   
   const delayInput = document.querySelector("input[name='delay']");
   const stepInput = document.querySelector("input[name='step']");
   const amountInput = document.querySelector("input[name='amount']");
+  const button = document.querySelector("button");
+
+  button.disabled = true;
 
   const firstDelay = parseInt(delayInput.value);
   const step = parseInt(stepInput.value);
   const amount = parseInt(amountInput.value);
 
-  generatePromises(amount, firstDelay, step);
+  await generatePromises(amount, firstDelay, step);
+
+  button.disabled = false;
 }
 
-function generatePromises(amount, firstDelay, step) {
+async function generatePromises(amount, firstDelay, step) {
 
   for (let i = 0; i < amount; i++) {
     const delay = firstDelay + i * step;
-    createPromise(i + 1, delay)
+   await createPromise(i + 1, delay)
   .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
@@ -27,7 +32,7 @@ function generatePromises(amount, firstDelay, step) {
     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
   });
   
-  }
+}
 }
 
 function createPromise(position, delay) {
@@ -46,8 +51,4 @@ function createPromise(position, delay) {
 }
 
 
-function resetForm(...inputs) {
-  inputs.forEach((input) => {
-    input.value = "";
-  });
-}
+
