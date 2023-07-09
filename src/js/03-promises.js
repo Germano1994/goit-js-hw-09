@@ -3,10 +3,7 @@ document.querySelector(".form").addEventListener("submit", handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
 
-   const submitButton = document.querySelector(".form button");
-
-  submitButton.disabled = true;
-
+  
   const delayInput = document.querySelector("input[name='delay']");
   const stepInput = document.querySelector("input[name='step']");
   const amountInput = document.querySelector("input[name='amount']");
@@ -28,10 +25,8 @@ function generatePromises(amount, firstDelay, step) {
   })
   .catch(({ position, delay }) => {
     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-  })
-  .finally(() => {
-    submitButton.disabled = false;
   });
+  
   }
 }
 
@@ -47,5 +42,12 @@ function createPromise(position, delay) {
         reject(result);
       }
     }, delay);
+  });
+}
+
+
+function resetForm(...inputs) {
+  inputs.forEach((input) => {
+    input.value = "";
   });
 }
