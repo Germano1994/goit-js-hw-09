@@ -26,6 +26,9 @@ function generatePromises(amount, firstDelay, step) {
   })
   .catch(({ position, delay }) => {
     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+  })
+  .finally(() => {
+    submitButton.disabled = false;
   });
   }
 }
